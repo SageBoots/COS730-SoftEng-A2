@@ -1,30 +1,49 @@
+import java.util.*;
+
 public class Database
 {
-    private String name;
-    private String url;
-    private String username;
-    private String password;
+    private List<Review> reviews = new ArrayList<>();
+    private List<Reviewer> reviewers = new ArrayList<>();
+    private List<int> scores = new ArrayList<>();
+    private List<Submission> submissions = new ArrayList<>();
 
-    public Database(String name, String url, String username, String password) {
-        this.name = name;
-        this.url = url;
-        this.username = username;
-        this.password = password;
+    public void saveSubmission(Submission data)
+    {
+        papers.add(data);
     }
 
-    public String getName() {
-        return name;
+    public void saveReview(Review review)
+    {
+        reviews.add(review);
     }
 
-    public String getUrl() {
-        return url;
+    public void saveReviewer(Reviewer reviewer)
+    {
+        reviewers.add(reviewer);
     }
 
-    public String getUsername() {
-        return username;
+    public void saveScore(int score)
+    {
+        scores.add(score);
     }
 
-    public String getPassword() {
-        return password;
+    public List<Reviewer> fetchReviewers()
+    {
+        return new ArrayList<>(reviewers);
+    }
+
+    public List<Review> fetchReviews()
+    {
+        return new ArrayList<>(reviews);
+    }
+
+    public List<int> fetchScores()
+    {
+        return new ArrayList<>(scores);
+    }
+
+    public List<Submission> fetchSubmissions()
+    {
+        return new ArrayList<>(submissions);
     }
 }

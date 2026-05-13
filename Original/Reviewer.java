@@ -1,17 +1,41 @@
-public class Reviewer {
-    private String name;
-    private String email;
+java.util.*;
 
-    public Reviewer(String name, String email) {
+public class Reviewer
+{
+    private String name;
+    private boolean available = true;
+    private List<Review> assignedReviews = new ArrayList<>();
+    private int maxAssignedReviews;
+
+    public Reviewer(String name)
+    {
         this.name = name;
-        this.email = email;
+        this.maxAssignedReviews = new Random().nextInt(10);
+
+        this.available = New Random().nextBoolean();
     }
 
-    public String getName() {
+    public String getName()
+    {
         return name;
     }
 
-    public String getEmail() {
-        return email;
+    public boolean isAvailable()
+    {
+        return available;
+    }
+
+    public void assignReview(Review review)
+    {
+        assignedReviews.add(review);
+
+        if (assignedReviews.size() >= maxAssignedReviews)
+        {
+            available = false;
+        }
+        else
+        {
+            available = true;
+        }
     }
 }

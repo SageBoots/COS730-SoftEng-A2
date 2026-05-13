@@ -1,12 +1,9 @@
+java.util.*;
+
 public class Validator
 {
-    public static boolean validate(String input)
+    public static boolean validateFormat(Submission input)
     {
-        if (input == null || input.isEmpty())
-        {
-            return false;
-        }
-        
-        return true;
+        return input.isValid;
     }
 }
