@@ -11,9 +11,8 @@ public class Reviewer
     public Reviewer(String name)
     {
         this.name = name;
-        this.maxAssignedReviews = new Random().nextInt(10);
-
-        this.available = new Random().nextBoolean();
+        this.maxAssignedReviews = 10;
+        this.available = true;
     }
 
     public String getName()
@@ -31,7 +30,6 @@ public class Reviewer
         if (assignedReviews.size() < maxAssignedReviews)
         {
             assignedReviews.add(submission);
-            available = true;
         }
         else
         {
@@ -42,5 +40,11 @@ public class Reviewer
     public void submitScore(int score)
     {
         manager.saveScore(score);
+        assignedReviews.removeFirst();
+        
+        if (assignedReviews.size() < maxAssignedReviews)
+        {
+            available = true;
+        }
     }
 }

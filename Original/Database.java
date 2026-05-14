@@ -40,17 +40,14 @@ public class Database
     public List<Integer> fetchScores(Submission submission)
     {
         List<Integer> submissionScores = new ArrayList<>();
-
-        for (Review review : reviews)
-        {
-            if (review.getTitle().equals(submission.getTitle()))
-            {
+        for (Review review : reviews) {
+            if (review.getTitle().equals(submission.getTitle())) {
                 submissionScores.add(review.getScore());
             }
         }
         
-        return new ArrayList<>(scores);
-    }
+    return submissionScores; 
+}
 
     public List<Submission> fetchSubmissions()
     {

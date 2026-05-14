@@ -17,9 +17,8 @@ public class ReviewerManager
 
     public List<Reviewer> filterReviewers(Submission submission)
     {
-        List<Reviewer> filteredReviewers = new ArrayList<>();
-
-        filteredReviewers = filterConflicts(submission);
+        this.fetchReviewers();
+        List<Reviewer> filteredReviewers = filterConflicts(submission);
         filteredReviewers = checkWorkload(filteredReviewers);
 
         return filteredReviewers;

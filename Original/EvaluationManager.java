@@ -26,6 +26,13 @@ public class EvaluationManager
     public void calculateAverageScore()
     {
         List<Integer> scores = db.fetchScores(submission);
+
+        if (scores.isEmpty())
+        {
+            this.averageScore = 0;
+            return;
+        }
+
         int totalScore = 0;
 
         for (int score : scores)
@@ -39,6 +46,8 @@ public class EvaluationManager
     private void checkConsensus()
     {
         List<Integer> scores = db.fetchScores(submission);
+        if (scores.isEmpty()) return;
+
         int maxScore = Collections.max(scores);
         int minScore = Collections.min(scores);
 
@@ -56,18 +65,17 @@ public class EvaluationManager
     {
         if (averageScore >= 8)
         {
-            System.out.println("Submission accepted.");
+            notifyAcceptance();
         }
         else if (averageScore >= 5)
         {
-            System.out.println("Submission requires revision.");
+            notifyRevision();
         }
         else
         {
-            System.out.println("Submission rejected.");
+            notifyRejection();
         }
     }
-
     private void notifyAcceptance()
     {
         notificationService.AcceptedNotification();
