@@ -49,7 +49,7 @@ public class UI
     public static void main(String[] args)
     {
         UI app = new UI();
-        int testRuns = 1;
+        int testRuns = 200;
         
         System.out.println("Starting benchmark for " + testRuns + " iterations...");
         app.runBenchmark(testRuns);

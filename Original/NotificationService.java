@@ -22,7 +22,6 @@ public class NotificationService
 
     private void sendNotification()
     {
-        // Code to send notification
         System.out.println("Notification sent: " + message);
     }
 }

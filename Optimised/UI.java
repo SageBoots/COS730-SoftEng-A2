@@ -35,6 +35,9 @@ public class UI {
     public static void main(String[] args)
     {
         UI app = new UI();
-        app.runBenchmark(1000);
+        int testRuns = 2000;
+        
+        System.out.println("Starting benchmark for " + testRuns + " iterations...");
+        app.runBenchmark(testRuns);
     }
 }
