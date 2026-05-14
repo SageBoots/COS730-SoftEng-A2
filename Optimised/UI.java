@@ -20,7 +20,7 @@ public class UI {
             db.saveReview(new Review("ReviewerA", paper.getTitle(), 8));
             db.saveReview(new Review("ReviewerB", paper.getTitle(), 7));
             
-            controller.startEvaluation();
+            //controller.startEvaluation();
         }
 
         long endTime = System.nanoTime();

@@ -3,9 +3,9 @@ import java.util.*;
 public class SubmissionController
 {
     private Submission submission;
-    private ReviewerManager reviewerManager;
+    /*private ReviewerManager reviewerManager;
     private EvaluationManager evaluationManager;
-    /*private List<Reviewer> availableReviewers;*/
+    private List<Reviewer> availableReviewers;*/
     private Database db = new Database();
 
     public SubmissionController()
@@ -48,10 +48,10 @@ public class SubmissionController
             reviewer.assignReview(submission);
         }
         
-    }*/
+    }
 
     public void startEvaluation()
     {
-        evaluationManager = new EvaluationManager(db);
-    }
+        evaluationManager = new EvaluationManager(db, submission);
+    }*/
 }
