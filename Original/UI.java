@@ -1,11 +1,6 @@
 public class UI
 {
-    SubmissionController submissionController;
-
-    public UI()
-    {
-        this.submissionController = new SubmissionController();
-    }
+    SubmissionController submissionController = new SubmissionController();
 
     public void submit (Submission data)
     {
@@ -27,12 +22,12 @@ public class UI
             Submission paper = new Submission("Benchmark Paper " + i, "Alice");
             paper.isValid = true;
 
-            submissionController.validateFormat(paper);
+            submit(paper);
 
             db.saveReview(new Review("Bob", paper.getTitle(), 8));
             db.saveReview(new Review("Charlie", paper.getTitle(), 7));
 
-            submissionController.startEvaluation();
+            //submissionController.startEvaluation();
         }
 
         long endTime = System.nanoTime();
@@ -49,7 +44,7 @@ public class UI
     public static void main(String[] args)
     {
         UI app = new UI();
-        int testRuns = 600;
+        int testRuns = 200;
         
         System.out.println("Starting benchmark for " + testRuns + " iterations...\n");
         app.runBenchmark(testRuns);

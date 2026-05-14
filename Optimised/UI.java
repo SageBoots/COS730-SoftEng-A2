@@ -1,42 +1,44 @@
 public class UI
 {
-    SubmissionController controller = new SubmissionController();
+    SubmissionController submissionController= new SubmissionController();
+
+    public void submit (Submission data)
+    {
+        submissionController.validateFormat(data);
+    }
 
     public void runBenchmark(int iterations)
     {
-        Database db = controller.getDb();
+        Database db = submissionController.getDb();
 
-        db.saveReviewer(new Reviewer("ReviewerA"));
-        db.saveReviewer(new Reviewer("ReviewerB"));
+        db.saveReviewer(new Reviewer("Alice"));
+        db.saveReviewer(new Reviewer("Bob"));
+        db.saveReviewer(new Reviewer("Charlie"));
 
         long startTime = System.nanoTime();
 
         for (int i = 0; i < iterations; ++i)
         {
-            Submission paper = new Submission("Paper" + i, "Author" + i);
+            Submission paper = new Submission("Benchmark Paper " + i, "Alice");
             paper.isValid = true;
-            
-            controller.validateFormat(paper);
-            
-            db.saveReview(new Review("ReviewerA", paper.getTitle(), 8));
-            db.saveReview(new Review("ReviewerB", paper.getTitle(), 7));
-            
-            //controller.startEvaluation();
+
+            submit(paper);
         }
 
         long endTime = System.nanoTime();
-        double totalTimeMs = (endTime - startTime) / 1_000_000.0;
-        double avgTime = totalTimeMs / iterations;
+        double totalDurationNs = endTime - startTime;
+        double totalDurationMs = totalDurationNs / 1_000_000.0;
+        double averageDurationMs = totalDurationMs / iterations;
 
         System.out.println("--- Benchmark Results ---");
-        System.out.println("Total Time: " + totalTimeMs + " ms");
-        System.out.println("Avg per run: " + avgTime + " ms");
+        System.out.println("Total Time: " + totalDurationMs + " ms");
+        System.out.println("Avg per run: " + averageDurationMs + " ms");
     }
 
     public static void main(String[] args)
     {
         UI app = new UI();
-        int testRuns = 200;
+        int testRuns = 2000;
         
         System.out.println("Starting benchmark for " + testRuns + " iterations...\n");
         app.runBenchmark(testRuns);

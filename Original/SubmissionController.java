@@ -28,7 +28,7 @@ public class SubmissionController
             saveSubmission(data);
             getAvailableReviewers();
             assignReview();
-
+            startEvaluation();
             //System.out.println("Validation passed. Reviewers assigned.");
         }
     }
@@ -54,6 +54,7 @@ public class SubmissionController
 
     public void startEvaluation()
     {
-        evaluationManager = new EvaluationManager(db, submission);
+        evaluationManager = new EvaluationManager(db, submission, availableReviewers);
+        evaluationManager.startEvaluation();
     }
 }

@@ -6,12 +6,25 @@ public class EvaluationManager
     private float averageScore;
     private Submission submission;
     NotificationService notificationService;
+    private List<Reviewer> availableReviewers;
+    private int score;
 
-    public EvaluationManager(Database db, Submission submission)
+    public EvaluationManager(Database db, Submission submission, List<Reviewer> availableReviewers)
     {
         this.db = db;
         this.submission = submission;
+        this.availableReviewers = availableReviewers;
         this.notificationService = new NotificationService();
+    }
+
+    public void startEvaluation()
+    {
+        for (Reviewer reviewer : availableReviewers)
+        {
+            score = (int)(Math.random() * 10) + 1;
+            reviewer.submitScore(score);
+            db.saveScore(score);
+        }
 
         this.calculateAverageScore();
         this.checkConsensus();

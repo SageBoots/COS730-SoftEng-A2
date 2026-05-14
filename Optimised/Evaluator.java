@@ -18,7 +18,8 @@ public class Evaluator
         return (max - min) <= 2;
     }
 
-    public String applyRules(float average) {
+    public String applyRules(float average)
+    {
         if (average >= 8) return "accepted";
         if (average >= 5) return "revision";
         return "rejected";
