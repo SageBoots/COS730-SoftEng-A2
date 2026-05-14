@@ -1,4 +1,5 @@
-public class UI {
+public class UI
+{
     SubmissionController controller = new SubmissionController();
 
     public void runBenchmark(int iterations)
@@ -35,9 +36,9 @@ public class UI {
     public static void main(String[] args)
     {
         UI app = new UI();
-        int testRuns = 2000;
+        int testRuns = 200;
         
-        System.out.println("Starting benchmark for " + testRuns + " iterations...");
+        System.out.println("Starting benchmark for " + testRuns + " iterations...\n");
         app.runBenchmark(testRuns);
     }
 }

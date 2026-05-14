@@ -5,6 +5,7 @@ public class EvaluationManager
     private Database db;
     private Evaluator evaluator = new Evaluator();
     private NotificationService notificationService = new NotificationService();
+    private Submission submission;
 
     public EvaluationManager(Database db)
     {
@@ -16,7 +17,13 @@ public class EvaluationManager
         db.saveScore(score);
     }
 
-    public void startEvaluation(Submission submission)
+    public void startEvaluationProcess(Submission submission)
+    {
+        this.submission = submission;
+        this.startEvaluation();
+    }
+
+    public void startEvaluation()
     {
         List<Integer> scores = db.fetchScores(submission);
         

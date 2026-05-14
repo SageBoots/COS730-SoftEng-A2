@@ -18,6 +18,7 @@ public class SubmissionController
     public void validateFormat(Submission data)
     {
         this.submission = data;
+        
         if (!Validator.isValid(data))
         {
             System.out.println("Validation failed for: " + data.getTitle());
@@ -28,7 +29,7 @@ public class SubmissionController
             getAvailableReviewers();
             assignReview();
 
-            System.out.println("Validation passed. Reviewers assigned.");
+            //System.out.println("Validation passed. Reviewers assigned.");
         }
     }
 

@@ -23,9 +23,10 @@ public class ReviewerController
 
         for (Reviewer reviewer : filteredReviewers)
         {
-            reviewer.submitScore((int)(Math.random() * 10) + 1); // Simulate score submission
+            reviewer.submitScore((int)(Math.random() * 10) + 1);
         }
-
+        
+        evaluationManager.startEvaluationProcess(submission);
     }
 
     public void getAvailableReviewers()

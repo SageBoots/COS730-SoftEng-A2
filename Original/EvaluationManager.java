@@ -53,11 +53,11 @@ public class EvaluationManager
 
         if (maxScore - minScore > 2)
         {
-            System.out.println("Consensus not reached, further review needed.");
+            //System.out.println("Consensus not reached, further review needed.");
         }
         else
         {
-            System.out.println("Consensus reached.");
+            //System.out.println("Consensus reached.");
         }
     }
 

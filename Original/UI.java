@@ -40,7 +40,7 @@ public class UI
         double totalDurationMs = totalDurationNs / 1_000_000.0;
         double averageDurationMs = totalDurationMs / iterations;
 
-        System.out.println("\n--- Benchmark Results ---");
+        System.out.println("--- Benchmark Results ---");
         System.out.println("Total Iterations: " + iterations);
         System.out.println("Total Execution Time: " + totalDurationMs + " ms");
         System.out.println("Average Time per Run: " + averageDurationMs + " ms");
@@ -49,9 +49,9 @@ public class UI
     public static void main(String[] args)
     {
         UI app = new UI();
-        int testRuns = 200;
+        int testRuns = 600;
         
-        System.out.println("Starting benchmark for " + testRuns + " iterations...");
+        System.out.println("Starting benchmark for " + testRuns + " iterations...\n");
         app.runBenchmark(testRuns);
     }
 }
