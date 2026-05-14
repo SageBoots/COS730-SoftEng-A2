@@ -44,7 +44,7 @@ public class UI
     public static void main(String[] args)
     {
         UI app = new UI();
-        int testRuns = 200;
+        int testRuns = 2000;
         
         System.out.println("Starting benchmark for " + testRuns + " iterations...\n");
         app.runBenchmark(testRuns);

@@ -25,8 +25,7 @@ public class ReviewerController
         for (Reviewer reviewer : filteredReviewers)
         {
             score = (int)(Math.random() * 10) + 1;
-            reviewer.submitScore(score);
-            db.saveScore(score);
+            reviewer.submitScore(score, evaluationManager);
         }
         
         evaluationManager.startEvaluationProcess(submission);

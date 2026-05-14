@@ -6,7 +6,6 @@ public class Reviewer
     private boolean available = true;
     private List<Submission> assignedReviews = new ArrayList<>();
     private int maxAssignedReviews;
-    private EvaluationManager manager;
 
     public Reviewer(String name)
     {
@@ -37,7 +36,7 @@ public class Reviewer
         }
     }
 
-    public void submitScore(int score)
+    public void submitScore(int score, EvaluationManager manager)
     {
         manager.saveScore(score);
         assignedReviews.removeFirst();

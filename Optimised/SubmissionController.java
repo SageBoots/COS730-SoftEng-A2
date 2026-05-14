@@ -1,6 +1,7 @@
 public class SubmissionController
 {
     private Database db = new Database();
+    private ReviewerController reviewerController = new ReviewerController(db);
 
     public SubmissionController()
     {}
@@ -16,6 +17,7 @@ public class SubmissionController
         else
         {
             saveSubmission(data);
+            reviewerController.startReviewProcess(data);
         }
     }
 
