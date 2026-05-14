@@ -4,12 +4,12 @@ public class Database
 {
     private List<Review> reviews = new ArrayList<>();
     private List<Reviewer> reviewers = new ArrayList<>();
-    private List<int> scores = new ArrayList<>();
+    private List<Integer> scores = new ArrayList<>();
     private List<Submission> submissions = new ArrayList<>();
 
     public void saveSubmission(Submission data)
     {
-        papers.add(data);
+        submissions.add(data);
     }
 
     public void saveReview(Review review)
@@ -37,8 +37,18 @@ public class Database
         return new ArrayList<>(reviews);
     }
 
-    public List<int> fetchScores()
+    public List<Integer> fetchScores(Submission submission)
     {
+        List<Integer> submissionScores = new ArrayList<>();
+
+        for (Review review : reviews)
+        {
+            if (review.getTitle().equals(submission.getTitle()))
+            {
+                submissionScores.add(review.getScore());
+            }
+        }
+        
         return new ArrayList<>(scores);
     }
 

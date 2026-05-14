@@ -1,7 +1,10 @@
 public class UI
 {
+    SubmissionController submissionController;
+
     public void submit (Submission data)
     {
+        submissionController.validateFormat(data);
         System.out.println("Data submitted");
         // Add your submit logic here
     }

@@ -1,18 +1,33 @@
-java.util.*;
+import java.util.*;
 
 public class SubmissionController
 {
-    public Validator validator;
+    private Validator validator;
     private Submission submission;
     private ReviewerManager reviewerManager;
     private List<Reviewer> availableReviewers;
+    private EvaluationManager evaluationManager;
+    private Database db = new Database();
 
-    public void submit(Submission data)
+    public void validateFormat(Submission data)
     {
-        if (!validator.validateFormat(data))
+        this.submission = data;
+        if (!Validator.isValid(data))
         {
             throw new IllegalArgumentException("Invalid format");
         }
+        else
+        {
+            saveSubmission(data);
+            getAvailableReviewers();
+            assignReview();
+            startEvaluation();
+        }
+    }
+
+    private void saveSubmission(Submission data)
+    {
+        db.saveSubmission(data);
     }
 
     public void getAvailableReviewers()
@@ -27,5 +42,10 @@ public class SubmissionController
             reviewer.assignReview(submission);
         }
         
+    }
+
+    public void startEvaluation()
+    {
+        evaluationManager = new EvaluationManager(db, submission);
     }
 }

@@ -1,18 +1,19 @@
-java.util.*;
+import java.util.*;
 
 public class Reviewer
 {
     private String name;
     private boolean available = true;
-    private List<Review> assignedReviews = new ArrayList<>();
+    private List<Submission> assignedReviews = new ArrayList<>();
     private int maxAssignedReviews;
+    private EvaluationManager manager;
 
     public Reviewer(String name)
     {
         this.name = name;
         this.maxAssignedReviews = new Random().nextInt(10);
 
-        this.available = New Random().nextBoolean();
+        this.available = new Random().nextBoolean();
     }
 
     public String getName()
@@ -25,17 +26,21 @@ public class Reviewer
         return available;
     }
 
-    public void assignReview(Review review)
+    public void assignReview(Submission submission)
     {
-        assignedReviews.add(review);
-
-        if (assignedReviews.size() >= maxAssignedReviews)
+        if (assignedReviews.size() < maxAssignedReviews)
         {
-            available = false;
+            assignedReviews.add(submission);
+            available = true;
         }
         else
         {
-            available = true;
+            available = false;
         }
+    }
+
+    public void submitScore(int score)
+    {
+        manager.saveScore(score);
     }
 }

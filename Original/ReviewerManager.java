@@ -1,10 +1,9 @@
-import java.util.List;
+import java.util.*;
 
 public class ReviewerManager
 {
     private Database db;
     private List<Reviewer> reviewerList;
-    private List<Reviewer>
 
     public ReviewerManager(Database db)
     {
@@ -28,26 +27,17 @@ public class ReviewerManager
 
     public List<Reviewer> filterConflicts(Submission submission)
     {
-        List<Reviewer> conflictFreeReviewers = new ArrayList<>();
-        boolean hasConflict;
+        List<Reviewer> nonConflictingReviewers = new ArrayList<>();
 
         for (Reviewer reviewer : reviewerList)
         {
-            hasConflict = false;
-
-            for (Submission submission : submissions)
+            if (!submission.getAuthor().equals(reviewer.getName()))
             {
-                if (Submission.getAuthor() = )
-                {
-                    hasConflict = true;
-                    break;
-                }
-            }
-            if (!hasConflict)
-            {
-                conflictFreeReviewers.add(reviewer);
+                nonConflictingReviewers.add(reviewer);
             }
         }
+
+        return nonConflictingReviewers;
     }
 
     private List<Reviewer> checkWorkload(List<Reviewer> reviewers)
