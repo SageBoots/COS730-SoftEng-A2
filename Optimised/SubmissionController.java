@@ -5,19 +5,18 @@ public class SubmissionController
     private Submission submission;
     private ReviewerManager reviewerManager;
     private EvaluationManager evaluationManager;
-    private List<Reviewer> availableReviewers;
+    /*private List<Reviewer> availableReviewers;*/
     private Database db = new Database();
 
     public SubmissionController()
-    {
-        this.reviewerManager = new ReviewerManager(db);
-    }
+    {}
 
     public Database getDb() { return db; }
 
     public void validateFormat(Submission data)
     {
         this.submission = data;
+
         if (!Validator.isValid(data))
         {
             System.out.println("Validation failed for: " + data.getTitle());
@@ -25,10 +24,10 @@ public class SubmissionController
         else
         {
             saveSubmission(data);
-            getAvailableReviewers();
-            assignReview();
+            /*getAvailableReviewers();
+            assignReview();*/
 
-            System.out.println("Validation passed. Reviewers assigned.");
+            //System.out.println("Validation passed. Reviewers assigned.");
         }
     }
 
@@ -37,7 +36,7 @@ public class SubmissionController
         db.saveSubmission(data);
     }
 
-    public void getAvailableReviewers()
+    /*public void getAvailableReviewers()
     {
         this.availableReviewers = reviewerManager.filterReviewers(submission);
     }
@@ -49,10 +48,10 @@ public class SubmissionController
             reviewer.assignReview(submission);
         }
         
-    }
+    }*/
 
     public void startEvaluation()
     {
-        evaluationManager = new EvaluationManager(db, submission);
+        evaluationManager = new EvaluationManager(db);
     }
 }

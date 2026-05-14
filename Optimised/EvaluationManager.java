@@ -3,19 +3,12 @@ import java.util.*;
 public class EvaluationManager
 {
     private Database db;
-    private float averageScore;
-    private Submission submission;
-    NotificationService notificationService;
+    private Evaluator evaluator = new Evaluator();
+    private NotificationService notificationService = new NotificationService();
 
-    public EvaluationManager(Database db, Submission submission)
+    public EvaluationManager(Database db)
     {
         this.db = db;
-        this.submission = submission;
-        this.notificationService = new NotificationService();
-
-        this.calculateAverageScore();
-        this.checkConsensus();
-        this.applyRules();
     }
 
     public void saveScore(int score)
@@ -23,71 +16,26 @@ public class EvaluationManager
         db.saveScore(score);
     }
 
-    public void calculateAverageScore()
+    public void startEvaluation(Submission submission)
     {
         List<Integer> scores = db.fetchScores(submission);
+        
+        float avg = evaluator.calculateAverage(scores);
+        boolean consensus = evaluator.checkConsensus(scores);
+        String result = evaluator.applyRules(avg);
 
-        if (scores.isEmpty())
+        if (!consensus)
         {
-            this.averageScore = 0;
-            return;
+            System.out.println("Consensus not reached.");
         }
-
-        int totalScore = 0;
-
-        for (int score : scores)
-        {
-            totalScore += score;
-        }
-
-        this.averageScore = (float) totalScore / scores.size();
+        
+        notify(result);
     }
 
-    private void checkConsensus()
+    private void notify(String result)
     {
-        List<Integer> scores = db.fetchScores(submission);
-        if (scores.isEmpty()) return;
-
-        int maxScore = Collections.max(scores);
-        int minScore = Collections.min(scores);
-
-        if (maxScore - minScore > 2)
-        {
-            System.out.println("Consensus not reached, further review needed.");
-        }
-        else
-        {
-            System.out.println("Consensus reached.");
-        }
-    }
-
-    private void applyRules()
-    {
-        if (averageScore >= 8)
-        {
-            notifyAcceptance();
-        }
-        else if (averageScore >= 5)
-        {
-            notifyRevision();
-        }
-        else
-        {
-            notifyRejection();
-        }
-    }
-    private void notifyAcceptance()
-    {
-        notificationService.AcceptedNotification();
-    }
-
-    private void notifyRejection()
-    {
-        notificationService.RejectionNotification();
-    }
-
-    private void notifyRevision()
-    {
-        notificationService.RevisionRequestNotification();
+        if (result.equals("accepted")) notificationService.AcceptedNotification();
+        else if (result.equals("revision")) notificationService.RevisionRequestNotification();
+        else notificationService.RejectionNotification();
     }
 }
